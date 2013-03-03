@@ -1,6 +1,20 @@
 {% extends "layout.html" %}
 {% block body %}
 <h1>{{content.title}}</h1>
-<div>{{content.html|safe}}</div>
+<div class="editable_textarea">{{content.html|safe}}</div>
 <p>{{content.date}}</p>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="{{url_for('static', filename='jquery.jeditable.mini.js')}}"></script>
+<script>
+  $(".editable_textarea").editable("{{content.title}}", { 
+      type   : 'textarea',
+      submitdata: { _method: "post" },
+      name     : 'body',
+      loadurl  : '/rst/' + '{{content.title}}',
+      rows     : 10,
+      submit : 'OK',
+      cancel : 'cancel',
+      cssclass : "editable"
+  });
+</script>
 {% endblock %}

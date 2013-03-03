@@ -42,5 +42,13 @@ def post_content(title=None):
     db_session.commit()
     return content.html
 
+
+@app.route("/rst/<title>")
+def show_rst(title):
+    content = WikiContent.query.filter_by(title=title).first()
+    if content is None:
+        abort(404)
+    return content.body
+
 if __name__ == "__main__":
     app.run()
