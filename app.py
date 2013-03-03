@@ -40,7 +40,7 @@ def post_content(title=None):
         content.date = datetime.now()
     db_session.add(content)
     db_session.commit()
-    return content.body
+    return content.html
 
 if __name__ == "__main__":
     app.run()
